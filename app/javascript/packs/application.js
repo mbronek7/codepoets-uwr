@@ -13,3 +13,4 @@ import * as ActiveStorage from "activestorage"
 ActiveStorage.start()
 
 import "channels"
+import "actiontext"
