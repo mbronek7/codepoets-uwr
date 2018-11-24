@@ -16,7 +16,7 @@
                  <% if user_signed_in? %>
                  <li><%= link_to 'Nowa Fotka', root_path %></li>
                  <li><%= link_to 'Edycja profilu', root_path %></li>
-                 <li><%= link_to 'Wylogowanie', root_path  %></li>
+                 <li><%= link_to 'Wylogowanie', logout_path  %></li>
                 <% else %>
                  <li><%= link_to 'O mnie', root_path %></li>
                  <li><%= link_to 'Logowanie', login_path %></li>
