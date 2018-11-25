@@ -1,0 +1,30 @@
+<h1>My Posts</h1>
+
+<%= link_to new_author_post_path, class: "btn btn-success" do %>
+  <span class="fa fa-plus"></span> Add new post
+<% end %>
+
+
+<table class="table table-striped table-dark">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Visit Count</th>
+       <th></th>
+       <th></th>
+    </tr>
+    <tbody>
+      <% @posts.each do |post| %>
+        <tr>
+          <td><%= link_to post.title, post_path(post) %></td>
+          <td><%= post.visit_count %></td>
+          <td>
+             <%= link_to "Edit", edit_author_post_path(post), class: "btn btn-default btn-xs" %>
+          </td>
+          <td>
+             <%= link_to t("delete"), author_post_path(post), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-xs" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+</table>

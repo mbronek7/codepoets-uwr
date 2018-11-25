@@ -1,13 +1,18 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root "posts#index"
-  resources :posts
+  namespace :author do
+    resources :posts
+  end
 
-  get "/login", to: "sessions#new"
-  post "/login", to: "sessions#create"
-  get "/logout", to: "sessions#destroy"
+  root 'posts#index'
+  resources :posts, only: %i[index show]
 
-  get "/signup", to: "users#new"
-  post "/users", to: "users#create"
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  get '/logout', to: 'sessions#destroy'
+
+  get '/signup', to: 'users#new'
+  post '/users', to: 'users#create'
+  get '/users/:id', to: 'users#show', as: 'user'
 end

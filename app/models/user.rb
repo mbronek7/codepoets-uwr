@@ -12,8 +12,7 @@
 #  updated_at      :datetime         not null
 #
 
-
 class User < ApplicationRecord
   has_secure_password
-  has_many :posts
+  has_many :posts, foreign_key: :author_id, class_name: 'Post', dependent: :destroy
 end

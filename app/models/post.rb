@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: posts
@@ -8,21 +9,20 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  visit_count :integer          default(0)
-#  user_id     :bigint(8)
+#  author_id   :bigint(8)
 #  slug        :string
 #
 
 class Post < ApplicationRecord
   extend FriendlyId
-  friendly_id :slug_candidates, use: %i(finders slugged)
+  friendly_id :slug_candidates, use: %i[finders slugged]
   has_rich_text :content
-  belongs_to :user
-
+  belongs_to :author, class_name: 'User'
 
   def slug_candidates
     [
       :title,
-      %i(title id)
+      %i[title id]
     ]
   end
 end

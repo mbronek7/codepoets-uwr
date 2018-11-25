@@ -16,11 +16,12 @@ gem 'actiontext', github: 'rails/actiontext', require: 'action_text'
 gem 'bcrypt', '~> 3.1', '>= 3.1.12'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 gem 'font-awesome-rails'
+gem 'friendly_id', '~> 5.2.4'
 gem 'image_processing', '~> 1.2' # for Active Storage variants
 gem 'jbuilder', '~> 2.5'
-gem 'turbolinks', '~> 5'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
-gem 'friendly_id', '~> 5.2.4'
+gem 'simple_form', '~> 4.1'
+gem 'turbolinks', '~> 5'
 
 group :development, :test do
   gem 'annotate', '~> 2.7', '>= 2.7.4'
