@@ -2,6 +2,7 @@
 @import "bootstrap";
 @import "actiontext";
 @import "font-awesome";
+@import "registration";
 
 @import url('https://fonts.googleapis.com/css?family=Lobster');
 
@@ -12,8 +13,8 @@
   color: #fff;
   letter-spacing: -1px;
   padding-top: 9px;
+  margin-top: -10px;
   font-family: 'Lobster', cursive;
-  color:white;
 }
 
 .title:hover {
@@ -34,4 +35,8 @@ body::after {
   content: '';
   display: block;
   height: 30px;
+}
+
+.navbar {
+  border-radius: 0;
 }

@@ -14,13 +14,13 @@
                 <li><%= link_to 'Posts', posts_path %></li>
 
                  <% if user_signed_in? %>
-                 <li><%= link_to 'Nowe Pytanie', root_path %></li>
-                 <li><%= link_to 'Moje posty', author_posts_path %></li>
-                 <li><%= link_to 'Wylogowanie', logout_path  %></li>
+                 <li><%= link_to 'New question', root_path %></li>
+                 <li><%= link_to 'My posts', author_posts_path %></li>
+                 <li><%= link_to 'Log out', logout_path  %></li>
                 <% else %>
-                 <li><%= link_to 'O mnie', root_path %></li>
-                 <li><%= link_to 'Logowanie', login_path %></li>
-                 <li><%= link_to 'Rejestracja', signup_path  %></li>
+                 <li><%= link_to 'About me', root_path %></li>
+                 <li><%= link_to 'Log in', login_path %></li>
+                 <li><%= link_to 'Register', signup_path  %></li>
                 <% end %>
       </ul>
     </div>
