@@ -21,27 +21,18 @@ class Author::PostsController < ApplicationController
 
   def create
     @post = current_user.posts.new(post_params)
-
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: @post }
-      else
-        format.html { render :new }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
+    if @post.save
+      redirect_to @post, notice: 'Post was successfully created'
+    else
+      render action: :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        format.json { render :show, status: :ok, location: @post }
-      else
-        format.html { render :edit }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
+    if @post.update(post_params)
+      redirect_to @post, notice: 'Post was successfully updated.'
+    else
+      render action: :edit
     end
   end
 
@@ -57,10 +48,14 @@ class Author::PostsController < ApplicationController
 
   def correct_user
     @pin = current_user.posts.friendly.find(params[:id])
-    redirect_to author_post_path, notice: 'Nie jesteś uprawniony do edycji tego postu' if @pin.nil?
+    redirect_to author_post_path, notice: 'You are not allowed to edit this post' if @pin.nil?
   end
 
   def set_post
     @post = Post.friendly.find(params[:id])
+  end
+
+  def post_params
+    params.require(:post).permit(:title, :content)
   end
 end
