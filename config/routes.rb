@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   end
 
   root 'posts#index'
-  resources :posts, only: %i[index show]
+  resources :posts, only: %i(index show)
+  resources :relationships, only: %i(create destroy)
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'

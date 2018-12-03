@@ -1,1 +1,100 @@
-<h1> <%= @user.name %> page</h1>
+<div class="container">
+  <div class="row m-y-2">
+    <div class="col-lg-8 push-lg-4">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a href="" data-target="#messages" data-toggle="tab" class="nav-link">Posts</a>
+        </li>
+      </ul>
+      <div class="tab-content p-b-3">
+        <div class="tab-pane active" id="profile">
+          <h4 class="m-y-2"><%= @user.name %></h4>
+          <div class="row">
+            <div class="col-md-6">
+              <h6>About</h6>
+              <p>
+                Web Designer, UI/UX Engineer
+              </p>
+              <h6>Hobbies</h6>
+              <p>
+                Indie music, skiing and hiking. I love the great outdoors.
+              </p>
+            </div>
+            <div class="col-md-6">
+              <h6>Recent Tags</h6>
+              <a href="" class="badge badge-info">html5</a>
+              <a href="" class="badge badge-info">react</a>
+              <a href="" class="badge badge-info">codeply</a>
+              <a href="" class="badge badge-info">angularjs</a>
+              <a href="" class="badge badge-info">css3</a>
+              <a href="" class="badge badge-info">jquery</a>
+              <a href="" class="badge badge-info">bootstrap</a>
+              <a href="" class="badge badge-info">responsive-design</a>
+              <hr>
+              <span class="badge badge-primary"><i class="fa fa-user"></i> <%= @user.followers.count %> Followers</span>
+              <span class="badge badge-danger"><i class="fa fa-eye"></i> <%= @user.posts.sum(:visit_count) %> Post Views</span>
+              <%= form_for(current_user.passive_following.build, remote: true) do |f| %>
+                <div><%= hidden_field_tag :followed_id, @user.id %></div>
+                <%= f.submit "Follow", class: "btn btn-primary" %>
+              <% end %>
+            </div>
+            <div class="col-md-12">
+              <h4 class="m-t-2"><span class="fa fa-clock-o ion-clock pull-xs-right"></span> Recent Activity</h4>
+              <table class="table table-hover table-striped">
+                <tbody>
+                  <tr>
+                    <td>
+                      <strong>Abby</strong> joined ACME Project Team in <strong>`Collaboration`</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>Gary</strong> deleted My Board1 in <strong>`Discussions`</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>Kensington</strong> deleted MyBoard3 in <strong>`Discussions`</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>John</strong> deleted My Board1 in <strong>`Discussions`</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>Skell</strong> deleted his post Look at Why this is.. in <strong>`Discussions`</strong>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!--/row-->
+        </div>
+        <div class="tab-pane" id="messages">
+          <h4 class="m-y-2">Recent Posts </h4>
+           <table class="table table-hover table-striped">
+            <tbody>
+              <% @user.posts.order(updated_at: :desc).take(3).each do | post |%>
+              <tr>
+                <td>
+                  <span class="pull-xs-right font-weight-bold"><%= post.updated_at.strftime("Last Modification at %F %H:%M") %></span> <%= link_to post.title, post %>
+                </td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 pull-lg-8 text-xs-center">
+      <img src="//placehold.it/240" class="m-x-auto img-fluid img-circle" alt="avatar">
+    </div>
+  </div>
+</div>
+<hr>

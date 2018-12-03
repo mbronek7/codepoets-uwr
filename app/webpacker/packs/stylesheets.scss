@@ -3,6 +3,7 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 @import '~@fortawesome/fontawesome-free/scss/solid';
 @import '../src/actiontext.scss';
+@import '../src/registration.scss';
 @import url('https://fonts.googleapis.com/css?family=Lobster');
 
 .title {
@@ -14,4 +15,9 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
   padding-top: 9px;
   margin-top: -10px;
   font-family: 'Lobster', cursive;
+}
+
+.content {
+  margin-left: 2%;
+  margin-right: 2%;
 }
