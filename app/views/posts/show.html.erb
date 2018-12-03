@@ -1,14 +1,12 @@
-
 <div id="posts">
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-  <strong>Author:</strong>
-  <%= @post.author.name %>
-  <strong>Content:</strong>
-  <%= @post.content %>
-</p>
-
-<%= link_to 'Back', posts_path %>
-
-<%= render 'disqus' %>
+  <p>
+    <strong>Title:</strong>
+    <%= @post.title %>
+    <strong>Author:</strong>
+    <%= @post.author.name %>
+    <strong>Content:</strong>
+    <%= @post.content %>
+  </p>
+  <%= link_to 'Back', posts_path %>
+  <%= render 'disqus' %>
+</div>

@@ -1,21 +1,21 @@
 <% posts.each_slice(3) do |slice| %>
-<div class="row">
-  <% slice.each do |post| %>
-  <div class="col-md-4">
-   <div class="thumbnail">
-      <em>Popularity: <%- post.popularity.times do %>
-                     <%= fa_icon "star-o" %>
-                 <% end %>
-      </em><br>
-      <em>Author: <%= link_to post.author.name , post.author %>
-      <%= link_to post_path(post) do %>
-      <% end %>
-      <div class="caption">
-      <h3><%= link_to post.title, post %></h3>
-          Visit count: <%= post.visit_count %>
+  <div class="row">
+    <% slice.each do |post| %>
+      <div class="col-md-4">
+        <div class="thumbnail">
+          <em>Popularity: <%- post.popularity.times do %>
+              <%= fa_icon "star-o" %>
+            <% end %>
+          </em><br>
+          <em>Author: <%= link_to post.author.name , post.author %>
+            <%= link_to post_path(post) do %>
+            <% end %>
+            <div class="caption">
+              <h3><%= link_to post.title, post %></h3>
+              Visit count: <%= post.visit_count %>
+            </div>
+        </div>
       </div>
-   </div>
+    <% end %>
   </div>
- <% end %>
-</div>
 <% end %>
