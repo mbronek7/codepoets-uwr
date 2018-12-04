@@ -4,9 +4,11 @@
         <div class="card mx-auto text-center" style="width: 45rem;">
           <div class="card-body">
             <h5 class="card-title"><%= link_to post.title, post %></h5>
+            <% if post.respond_to?("popularity") %>
             <p class="card-text"><small class="text-muted"><em>Popularity: <%- post.popularity.times do %>
                     <i class="fas fa-star"></i>
                   <% end %>
+            <% end %>
                 </em><br>
                 <em>Author: <%= link_to post.author.name , post.author %></em>
                   <%= link_to post_path(post) do %>

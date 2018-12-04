@@ -54,6 +54,6 @@ class Author::PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content)
+    params.require(:post).permit(:title, :content, :all_tags)
   end
 end
