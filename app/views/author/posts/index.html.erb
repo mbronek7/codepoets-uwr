@@ -19,7 +19,7 @@
             <%= link_to "Edit", edit_author_post_path(post), class: "btn btn-default btn-xs" %>
           </td>
           <td>
-            <%= link_to t("delete"), author_post_path(post), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-xs" %>
+            <%= link_to t("delete"), author_post_path(post), method: :delete, data: {confirm_swal: "Are you sure?"}, class: "btn btn-danger btn-xs" %>
           </td>
         </tr>
       <% end %>
