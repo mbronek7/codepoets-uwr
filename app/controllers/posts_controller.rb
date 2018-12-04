@@ -5,7 +5,11 @@ class PostsController < ApplicationController
   before_action :authorize, only: %i[new edit update destroy]
 
   def index
-    @posts = PostWithPopularityQuery.call
+    if params[:tag]
+      @posts = Post.tagged_with(params[:tag])
+    else
+      @posts = PostWithPopularityQuery.call
+    end
   end
 
   def show

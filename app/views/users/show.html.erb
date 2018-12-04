@@ -25,14 +25,9 @@
             </div>
             <div class="col-md-6">
               <h6>Recent Tags</h6>
-              <a href="" class="badge badge-info">html5</a>
-              <a href="" class="badge badge-info">react</a>
-              <a href="" class="badge badge-info">codeply</a>
-              <a href="" class="badge badge-info">angularjs</a>
-              <a href="" class="badge badge-info">css3</a>
-              <a href="" class="badge badge-info">jquery</a>
-              <a href="" class="badge badge-info">bootstrap</a>
-              <a href="" class="badge badge-info">responsive-design</a>
+                <% @user.posts.order(updated_at: :desc).take(3).map(&:tags).flatten.each do | tag |%>
+                  <%= link_to tag.name, tag_path(tag.name), class: "badge badge-info"%>
+                <% end %>
               <hr>
               <span class="badge badge-primary"><i class="fa fa-user"></i> <%= @user.followers.count %> Followers</span>
               <span class="badge badge-danger"><i class="fa fa-eye"></i> <%= @user.posts.sum(:visit_count) %> Post Views</span>
