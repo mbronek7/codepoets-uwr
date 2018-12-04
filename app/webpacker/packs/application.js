@@ -3,7 +3,7 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
-
+import '../javascript/sweet-alert'
 import Rails from "rails-ujs"
 Rails.start()
 
@@ -17,6 +17,3 @@ import "channels"
 import "actiontext"
 import "bootstrap/dist/js/bootstrap";
 
-$(function () {
-  console.log('Hello World from Webpacker');
-});

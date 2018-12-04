@@ -38,10 +38,8 @@ class Author::PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    flash[:success] = 'Post has been deleted'
+    redirect_to posts_path
   end
 
   private
