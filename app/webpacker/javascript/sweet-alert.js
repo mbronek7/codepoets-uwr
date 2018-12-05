@@ -3,13 +3,11 @@ import sweetAlert from 'sweetalert2/dist/sweetalert2.all'
 
 const confirmed = (element, result) => {
   if (result.value) {
-    // User clicked confirm button
     element.removeAttribute('data-confirm-swal')
     element.click()
   }
 }
 
-// Display the confirmation dialog
 const showConfirmationDialog = (element) => {
   const message = element.getAttribute('data-confirm-swal')
   const text = element.getAttribute('data-text')
