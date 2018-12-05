@@ -14,13 +14,21 @@
           <h4 class="m-y-2"><%= @user.name %></h4>
           <div class="row">
             <div class="col-md-6">
-              <h6>About</h6>
+              <h6>Proffesion</h6>
               <p>
-                Web Designer, UI/UX Engineer
+                <%= @user.proffesion.blank? ? "Not Given" :  @user.proffesion %>
               </p>
-              <h6>Hobbies</h6>
+              <h6>Biography</h6>
               <p>
-                Indie music, skiing and hiking. I love the great outdoors.
+                <%= @user.biography.blank? ? "Not Given" :  @user.biography %>
+              </p>
+              <h6>Website</h6>
+              <p>
+                <% if @user.website_url.blank? %>
+                    "Not Given"
+                <% else %>
+                <%= link_to "#{@user.website_url}", "http://#{@user.website_url}" %>
+                <% end %>
               </p>
             </div>
             <div class="col-md-6">
@@ -80,7 +88,7 @@
               <% @user.posts.order(updated_at: :desc).take(3).each do | post |%>
               <tr>
                 <td>
-                  <span class="pull-xs-right font-weight-bold"><%= post.updated_at.strftime("Last Modification at %F %H:%M") %></span> <%= link_to post.title, post %>
+                  <span class="pull-xs-right font-weight-bold"><%= time_ago_in_words(post.updated_at) %> ago</span> <%= link_to post.title, post %>
                 </td>
               </tr>
               <% end %>

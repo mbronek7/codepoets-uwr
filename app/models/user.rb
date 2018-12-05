@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: users
@@ -10,6 +9,10 @@
 #  password_digest :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  biography       :text
+#  website_url     :string
+#  birthdate       :date
+#  proffesion      :string
 #
 
 class User < ApplicationRecord

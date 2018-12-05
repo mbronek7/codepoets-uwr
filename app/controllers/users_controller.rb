@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
+  before_action :correct_user, only: %i(edit update)
+
   def new
     @user = User.new
   end
+
+  def edit; end
 
   def create
     user = User.new(user_params)
@@ -15,6 +19,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    if @user.update(user_params)
+      redirect_to root_path, notice: "Your profile was successfully updated."
+    else
+      render action: :edit
+    end
+  end
+
   def show
     @user = User.includes(:posts).find(params[:id])
   end
@@ -22,6 +34,11 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :biography, :proffesion, :website_url)
+  end
+
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to login_path, notice: "You are not alolowed to edit this profile" if @user != current_user
   end
 end
