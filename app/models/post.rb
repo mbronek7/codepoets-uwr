@@ -18,7 +18,7 @@ class Post < ApplicationRecord
   friendly_id :slug_candidates, use: %i(finders slugged)
   has_rich_text :content
   belongs_to :author, class_name: "User"
-  has_many :taggings
+  has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings
 
   def slug_candidates
