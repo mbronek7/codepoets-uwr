@@ -27,7 +27,7 @@ group :development, :test do
   gem 'better_errors', '~> 2.5'
   gem 'binding_of_caller'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'rspec', '~> 3.8'
+  gem 'rspec-rails', '~> 3.8'
 end
 
 group :development do

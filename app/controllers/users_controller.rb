@@ -39,6 +39,6 @@ class UsersController < ApplicationController
 
   def correct_user
     @user = User.find(params[:id])
-    redirect_to login_path, notice: "You are not alolowed to edit this profile" if @user != current_user
+    redirect_to login_path, notice: "You are not allowed to edit this profile" if @user != current_user
   end
 end
