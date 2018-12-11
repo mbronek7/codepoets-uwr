@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.includes(:posts, :following, :followers).find(params[:id])
+    @user = User.includes(:posts, :following, :followers).friendly.find(params[:id])
   end
 
   private
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
   end
 
   def correct_user
-    @user = User.find(params[:id])
+    @user = User.friendly.find(params[:id])
     redirect_to login_path, notice: "You are not alolowed to edit this profile" if @user != current_user
   end
 end
