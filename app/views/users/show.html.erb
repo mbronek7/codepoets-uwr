@@ -25,24 +25,29 @@
               <h6>Website</h6>
               <p>
                 <% if @user.website_url.blank? %>
-                    "Not Given"
+                  "Not Given"
                 <% else %>
-                <%= link_to "#{@user.website_url}", "http://#{@user.website_url}" %>
+                  <%= link_to "#{@user.website_url}", "http://#{@user.website_url}" %>
                 <% end %>
               </p>
             </div>
             <div class="col-md-6">
               <h6>Recent Tags</h6>
-                <% @user.posts.order(updated_at: :desc).take(3).map(&:tags).flatten.each do | tag |%>
-                  <%= link_to tag.name, tag_path(tag.name), class: "badge badge-info"%>
-                <% end %>
+              <% @user.posts.order(updated_at: :desc).take(3).map(&:tags).flatten.each do | tag |%>
+                <%= link_to tag.name, tag_path(tag.name), class: "badge badge-info"%>
+              <% end %>
               <hr>
               <span class="badge badge-primary"><i class="fa fa-user"></i> <%= @user.followers.count %> Followers</span>
               <span class="badge badge-danger"><i class="fa fa-eye"></i> <%= @user.posts.sum(:visit_count) %> Post Views</span>
-              <% if current_user.present? %>
+              <% if current_user.present? && !current_user.following?(@user) %>
                 <%= form_for(current_user.passive_following.build, remote: true) do |f| %>
                   <div><%= hidden_field_tag :followed_id, @user.id %></div>
                   <%= f.submit "Follow", class: "btn btn-primary" %>
+                <% end %>
+              <% elsif current_user.following?(@user) %>
+                <%= form_for(current_user.active_relationships.find_by(followed_id: @user.id),
+                               html: { method: :delete }) do |f| %>
+                  <%= f.submit "Unfollow", class: "btn btn-danger" %>
                 <% end %>
               <% end %>
             </div>
@@ -83,14 +88,14 @@
         </div>
         <div class="tab-pane" id="messages">
           <h4 class="m-y-2">Recent Posts </h4>
-           <table class="table table-hover table-striped">
+          <table class="table table-hover table-striped">
             <tbody>
               <% @user.posts.order(updated_at: :desc).take(3).each do | post |%>
-              <tr>
-                <td>
-                  <span class="pull-xs-right font-weight-bold"><%= time_ago_in_words(post.updated_at) %> ago</span> <%= link_to post.title, post %>
-                </td>
-              </tr>
+                <tr>
+                  <td>
+                    <span class="pull-xs-right font-weight-bold"><%= time_ago_in_words(post.updated_at) %> ago</span> <%= link_to post.title, post %>
+                  </td>
+                </tr>
               <% end %>
             </tbody>
           </table>
