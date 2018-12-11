@@ -1,0 +1,72 @@
+<%= form_for @user do |f| %>
+  <div class="container">
+    <div class="row m-y-2">
+      <!-- edit form column -->
+      <div class="col-lg-4 text-lg-center">
+        <h2>Edit Profile</h2>
+      </div>
+      <div class="col-lg-8">
+        <% if @user.errors.any? %>
+          <div class="alert alert-danger">
+            <h2><%= pluralize(@user.errors.count, "error") %> prohibited this changes from being saved:</h2>
+            <ul>
+              <% @user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-lg-8 push-lg-4 personal-info">
+        <form role="form">
+          <div class="form-group row">
+            <label class="col-lg-3 col-form-label form-control-label">Name</label>
+            <div class="col-lg-9">
+              <%= f.text_field :name, class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-lg-3 col-form-label form-control-label">Email</label>
+            <div class="col-lg-9">
+              <%= f.text_field :email, class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-lg-3 col-form-label form-control-label">Proffesion</label>
+            <div class="col-lg-9">
+              <%= f.text_field :proffesion, class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-lg-3 col-form-label form-control-label">Website Url</label>
+            <div class="col-lg-9">
+              <%= f.text_field :website_url, class: "form-control", placeholder: "www.example.com" %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-lg-3 col-form-label form-control-label">Biography</label>
+            <div class="col-lg-9">
+              <%= f.text_area :biography, class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-lg-3 col-form-label form-control-label"></label>
+            <div class="col-lg-9">
+              <%= link_to 'Cancel', :back, class:"btn btn-secondary" %>
+              <%= f.submit "Save Changes", class: "btn btn-primary" %>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-lg-4 pull-lg-8 text-xs-center">
+        <img src="//placehold.it/150" class="m-x-auto img-fluid img-circle" alt="avatar" />
+        <h6 class="m-t-2">Upload a different photo</h6>
+        <label class="custom-file">
+          <input type="file" id="file" class="custom-file-input">
+          <span class="custom-file-control">Choose file</span>
+        </label>
+      </div>
+    </div>
+  </div>
+  <hr />
+<% end %>

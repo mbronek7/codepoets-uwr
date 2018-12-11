@@ -4,12 +4,20 @@
     <title>Codepoets</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'stylesheets' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-    <%= yield %>
+    <%= render 'shared/navbar' %>
+    <div class="container">
+      <% flash.each do |key, value| %>
+        <div class="<%= bootstrap_class_for(key) %>">
+          <%= value %>
+        </div>
+      <% end %>
+    </div>
+    <div class="content">
+      <%= yield %>
+    </div>
   </body>
 </html>
