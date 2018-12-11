@@ -7,7 +7,7 @@ class NotificationMailer < ApplicationMailer
     @post = Post.friendly.find(post_id)
 
     mail(to: @user.email,
-         subject: "New post from #{@author}") do |format|
+         subject: "New post from #{@author.name}") do |format|
       format.text
       format.html
     end

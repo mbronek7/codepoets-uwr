@@ -5,7 +5,7 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>There is a new post from, <em>Author: <%= link_to @author.name , @author %></em></h1>
+    <h1>There is a new post from: <em> <%= link_to @author.name , @author %></em></h1>
     <p>
       <h2>To see the post follow: <%= link_to @post.title, @post %></h2>
     </p>
