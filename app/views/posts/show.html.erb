@@ -1,9 +1,16 @@
 <div id="posts">
+  <h1><%= @post.title %></a></h1>
+  <p> by <%= link_to @post.author.name , @post.author %></p>
+  </p>
+  <hr>
+  <p><i class="fa fa-calendar"></i> Posted on: <%= time_tag(@post.created_at) %></p>
+  <p><i class="fa fa-calendar"></i> Last Edit: <%= time_ago_in_words(@post.updated_at) %> ago</p>
+  <p><i class="fa fa-tags"></i> Tags:
+  <% @post.tags.each do |tag| %>
+    <%= link_to tag.name, tag_path(tag.name), class: "badge badge-info"%>
+  <% end %>
+  </p>
   <p>
-    <strong>Title:</strong>
-    <%= @post.title %>
-    <strong>Author:</strong>
-    <%= @post.author.name %>
     <strong>Content:</strong>
     <%= @post.content %>
   </p>
