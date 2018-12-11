@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[show edit update destroy]
+  before_action :set_post, only: %i[edit update destroy]
   before_action :authorize, only: %i[new edit update destroy]
 
   def index
@@ -13,6 +13,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    @post = Post.includes(:tags).friendly.find(params[:id])
     IncrementPostVisitCount.call(@post)
   end
 
