@@ -23,6 +23,7 @@ class Author::PostsController < ApplicationController
     @post = current_user.posts.new(post_params)
     if @post.save
       redirect_to @post, notice: "Post was successfully created"
+      SendNotifications.call(@post.id)
     else
       render action: :new
     end
