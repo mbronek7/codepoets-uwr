@@ -13,12 +13,15 @@
 #  website_url     :string
 #  birthdate       :date
 #  proffesion      :string
+#  slug            :string
 #
 
 class User < ApplicationRecord
   include ::UserRelationship
+  extend FriendlyId
 
   has_secure_password
+  friendly_id :slug_candidates, use: %i(finders slugged)
   has_many :posts, foreign_key: :author_id, class_name: "Post", dependent: :destroy
   has_many :active_relationships, class_name:  "Relationship",
                               foreign_key: "follower_id",
@@ -28,5 +31,12 @@ class User < ApplicationRecord
                                dependent:   :destroy
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_following, source: :follower
+
+  def slug_candidates
+    [
+      :name,
+      %i(name id)
+    ]
+  end
 
 end
