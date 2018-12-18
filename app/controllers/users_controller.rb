@@ -16,14 +16,11 @@ class UsersController < ApplicationController
 
     if validation.success?
       @user.attributes = validation.output[:user]
-      if @user.save
-        session[:user_id] = @user.id
-        redirect_to root_path, notice: "Account Created!"
-      else
-        redirect_to signup_path, alert: "Password confirmation doesn't match Password"
-      end
+      @user.save
+      session[:user_id] = @user.id
+      redirect_to root_path, notice: "Account Created!"
     else
-      redirect_to signup_path, alert: validation.errors.to_s
+      redirect_to signup_path, alert: create_flash(validation.errors(full: true), "user")
     end
   end
 
@@ -49,5 +46,13 @@ class UsersController < ApplicationController
   def correct_user
     @user = User.friendly.find(params[:id])
     redirect_to login_path, notice: "You are not alolowed to edit this profile" if @user != current_user
+  end
+
+  def create_flash(errors, model_name)
+    flash = []
+    errors[:user].each do |error|
+      flash << error[1].first
+    end
+    flash.join("#{'<br />'.html_safe}")
   end
 end
