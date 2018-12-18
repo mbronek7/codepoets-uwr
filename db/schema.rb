@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_18_114233) do
+ActiveRecord::Schema.define(version: 2018_12_18_115411) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,9 +88,9 @@ ActiveRecord::Schema.define(version: 2018_12_18_114233) do
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "visit_count", default: 0
     t.bigint "author_id"
     t.string "slug"
+    t.integer "impressions_count"
     t.index ["author_id"], name: "index_posts_on_author_id"
     t.index ["slug"], name: "index_posts_on_slug", unique: true
   end
