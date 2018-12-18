@@ -15,6 +15,7 @@ class PostsController < ApplicationController
   def show
     @post = Post.includes(:tags).friendly.find(params[:id])
     impressionist(@post)
+    fresh_when etag: @post
   end
 
   def new

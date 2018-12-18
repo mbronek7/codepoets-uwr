@@ -29,6 +29,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.includes(:posts, :following, :followers).friendly.find(params[:id])
+    fresh_when etag: @user
   end
 
   private
