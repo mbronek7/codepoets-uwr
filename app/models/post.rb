@@ -15,6 +15,7 @@
 
 class Post < ApplicationRecord
   extend FriendlyId
+  is_impressionable
   friendly_id :slug_candidates, use: %i(finders slugged)
   has_rich_text :content
   belongs_to :author, class_name: "User"

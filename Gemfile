@@ -21,6 +21,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 gem 'simple_form', '~> 4.1'
 gem 'turbolinks', '~> 5'
+gem 'impressionist'
 
 group :development, :test do
   gem 'annotate', '~> 2.7', '>= 2.7.4'
