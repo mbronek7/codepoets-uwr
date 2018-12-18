@@ -20,7 +20,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to root_path, notice: "Account Created!"
     else
-      redirect_to signup_path, alert: create_flash(validation.errors(full: true), "user")
+      redirect_to signup_path, alert: create_user_flash(validation.errors(full: true))
     end
   end
 
@@ -48,7 +48,7 @@ class UsersController < ApplicationController
     redirect_to login_path, notice: "You are not alolowed to edit this profile" if @user != current_user
   end
 
-  def create_flash(errors, model_name)
+  def create_user_flash(errors)
     flash = []
     errors[:user].each do |error|
       flash << error[1].first
