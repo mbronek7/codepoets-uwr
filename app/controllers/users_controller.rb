@@ -10,12 +10,20 @@ class UsersController < ApplicationController
   def edit; end
 
   def create
-    user = User.new(user_params)
-    if user.save
-      session[:user_id] = user.id
-      redirect_to root_path
+    @user = User.new
+    validation = UserValidator::NewUserSchema.with(record: @user)
+                                             .call(params.permit!.to_h)
+
+    if validation.success?
+      @user.attributes = validation.output[:user]
+      if @user.save
+        session[:user_id] = @user.id
+        redirect_to root_path, notice: "Account Created!"
+      else
+        redirect_to signup_path, alert: "Password confirmation doesn't match Password"
+      end
     else
-      redirect_to signup_path
+      redirect_to signup_path, alert: validation.errors.to_s
     end
   end
 
