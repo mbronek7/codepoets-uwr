@@ -19,10 +19,14 @@ gem 'friendly_id', '~> 5.2.4'
 gem 'image_processing', '~> 1.2' # for Active Storage variants
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
-gem 'simple_form', '~> 4.1'
 gem 'turbolinks', '~> 5'
 gem 'impressionist'
 gem 'dry-validation', '~> 0.12.2'
+gem "rubycritic", require: false
+gem "grape"
+gem 'grape-swagger'
+gem 'grape-entity'
+gem 'grape-swagger-entity'
 
 group :development, :test do
   gem 'annotate', '~> 2.7', '>= 2.7.4'
