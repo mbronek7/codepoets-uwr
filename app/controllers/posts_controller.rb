@@ -1,20 +1,21 @@
 # frozen_string_literal: true
 
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[edit update destroy]
-  before_action :authorize, only: %i[new edit update destroy]
+  before_action :set_post, only: %i(edit update destroy)
+  before_action :authorize, only: %i(new edit update destroy)
 
   def index
-    if params[:tag]
-      @posts = Post.tagged_with(params[:tag])
-    else
-      @posts = PostWithPopularityQuery.call
-    end
+    @posts = if params[:tag]
+               Post.tagged_with(params[:tag])
+             else
+               PostWithPopularityQuery.call
+             end
   end
 
   def show
     @post = Post.includes(:tags).friendly.find(params[:id])
-    IncrementPostVisitCount.call(@post)
+    impressionist(@post)
+    fresh_when etag: @post
   end
 
   def new

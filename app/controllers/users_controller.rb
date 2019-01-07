@@ -10,12 +10,17 @@ class UsersController < ApplicationController
   def edit; end
 
   def create
-    user = User.new(user_params)
-    if user.save
-      session[:user_id] = user.id
-      redirect_to root_path
+    @user = User.new
+    validation = UserValidator::NewUserSchema.with(record: @user)
+                                             .call(params.permit!.to_h)
+
+    if validation.success?
+      @user.attributes = validation.output[:user]
+      @user.save
+      session[:user_id] = @user.id
+      redirect_to root_path, notice: "Account Created!"
     else
-      redirect_to signup_path
+      redirect_to signup_path, alert: create_user_flash(validation.errors(full: true))
     end
   end
 
@@ -29,6 +34,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.includes(:posts, :following, :followers).friendly.find(params[:id])
+    fresh_when etag: @user
   end
 
   private
@@ -40,5 +46,13 @@ class UsersController < ApplicationController
   def correct_user
     @user = User.friendly.find(params[:id])
     redirect_to login_path, notice: "You are not alolowed to edit this profile" if @user != current_user
+  end
+
+  def create_user_flash(errors)
+    flash = []
+    errors[:user].each do |error|
+      flash << error[1].first
+    end
+    flash.join("#{'<br />'.html_safe}")
   end
 end

@@ -38,13 +38,13 @@
               <% end %>
               <hr>
               <span class="badge badge-primary"><i class="fa fa-user"></i> <%= @user.followers.count %> Followers</span>
-              <span class="badge badge-danger"><i class="fa fa-eye"></i> <%= @user.posts.sum(:visit_count) %> Post Views</span>
+              <span class="badge badge-danger"><i class="fa fa-eye"></i> <%= @user.posts.sum(:impressions_count) %> Post Views</span>
               <% if current_user.present? && !current_user.following?(@user) %>
                 <%= form_for(current_user.passive_following.build, remote: true) do |f| %>
                   <div><%= hidden_field_tag :followed_id, @user.id %></div>
                   <%= f.submit "Follow", class: "btn btn-primary" %>
                 <% end %>
-              <% elsif current_user.following?(@user) %>
+              <% elsifcurrent_user.present? && current_user.following?(@user) %>
                 <%= form_for(current_user.active_relationships.find_by(followed_id: @user.id),
                                html: { method: :delete }) do |f| %>
                   <%= f.submit "Unfollow", class: "btn btn-danger" %>

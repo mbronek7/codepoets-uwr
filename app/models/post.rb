@@ -4,17 +4,18 @@
 #
 # Table name: posts
 #
-#  id          :bigint(8)        not null, primary key
-#  title       :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  visit_count :integer          default(0)
-#  author_id   :bigint(8)
-#  slug        :string
+#  id                :bigint(8)        not null, primary key
+#  title             :string
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  author_id         :bigint(8)
+#  slug              :string
+#  impressions_count :integer
 #
 
 class Post < ApplicationRecord
   extend FriendlyId
+  is_impressionable counter_cache: true, unique: :request_hash
   friendly_id :slug_candidates, use: %i(finders slugged)
   has_rich_text :content
   belongs_to :author, class_name: "User"

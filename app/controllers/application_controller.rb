@@ -2,6 +2,7 @@
 
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  etag { current_user.try :id }
   helper_method :user_signed_in?
 
   def current_user

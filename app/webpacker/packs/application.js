@@ -4,6 +4,7 @@
 // that code so it'll be compiled.
 
 import '../javascript/sweet-alert'
+import '../javascript/dynamic-title'
 import Rails from "rails-ujs"
 Rails.start()
 

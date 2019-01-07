@@ -6,9 +6,9 @@ class PostWithPopularityQuery
   def self.call
     Post.find_by_sql ['
       SELECT
-        id, title, visit_count, slug, author_id,
+        id, title, impressions_count, slug, author_id,
       ntile(?) OVER (
-        ORDER BY visit_count ASC
+        ORDER BY impressions_count ASC
       ) AS popularity
       FROM posts', POPULARITY_RANGES]
   end

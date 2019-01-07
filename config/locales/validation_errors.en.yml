@@ -1,0 +1,5 @@
+en:
+  errors:
+    correct_date?:
+      arg:
+        default: "birthdate must be in Y-m-d format"
