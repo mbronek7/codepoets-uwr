@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  mount API::Base => '/api'
+  mount API::Base => '/'
 
   namespace :author do
     resources :posts
