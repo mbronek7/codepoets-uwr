@@ -3,7 +3,7 @@
 Rails.application.routes.draw do
   mount API::Base => '/'
 
-  namespace :author do
+  namespace :authors do
     resources :posts
   end
 

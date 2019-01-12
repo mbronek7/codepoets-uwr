@@ -1,5 +1,5 @@
 <h1>My Posts</h1>
-<%= link_to new_author_post_path, class: "btn btn-success" do %>
+<%= link_to new_authors_post_path, class: "btn btn-success" do %>
   <span class="fa fa-plus"></span> Add new post
 <% end %>
 <table class="table table-striped table-dark">
@@ -18,10 +18,10 @@
           <td><%= post.impressionist_count(filter: :session_hash) %></td>
           <td><%= post.impressions_count %></td>
           <td>
-            <%= link_to "Edit", edit_author_post_path(post), class: "btn btn-default btn-xs" %>
+            <%= link_to "Edit", edit_authors_post_path(post), class: "btn btn-default btn-xs" %>
           </td>
           <td>
-            <%= link_to t("delete"), author_post_path(post), method: :delete, data: {confirm_swal: "Are you sure?"}, class: "btn btn-danger btn-xs" %>
+            <%= link_to t("delete"), authors_post_path(post), method: :delete, data: {confirm_swal: "Are you sure?"}, class: "btn btn-danger btn-xs" %>
           </td>
         </tr>
       <% end %>
