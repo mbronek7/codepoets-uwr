@@ -20,16 +20,19 @@ module Authors
     end
 
     def create
-      @post = Post.new
-      validation = PostValidator::NewPostSchema.with(record: @post)
-                                               .call(post_params.permit!.to_h)
-      if validation.success?
-        @post.attributes = validation.output[:post]
-        @post.save!
-        SendNotifications.call(@post.id)
-        redirect_to authors_post_path, notice: "Post was successfully created"
-      else
-        redirect_to new_authors_post_path, alert: create_flash(validation.errors(full: true))
+      transaction = CreatePost.new
+      transaction.call(post_params.merge!(author_id: @current_user.id)) do |result|
+        result.success do |post|
+          flash[:notice] = "Post was successfully created"
+          redirect_to post_path(post)
+        end
+
+        result.failure :validate do |errors|
+          @post = Post.new(post_params)
+          @errors = errors
+          flash[:alert] = "Post could not be created. Due to the error below:<br /> #{create_flash(@errors)}"
+          render :new
+        end
       end
     end
 
@@ -44,7 +47,7 @@ module Authors
     def destroy
       @post.destroy
       flash[:success] = "Post has been deleted"
-      redirect_to posts_path
+      redirect_to authors_posts_path
     end
 
     private
@@ -59,7 +62,15 @@ module Authors
     end
 
     def post_params
-      params.require(:post).permit(:title, :content, :all_tags)
+      params.require(:post).permit(:title, :content, :all_tags).to_h
+    end
+
+    def create_flash(errors)
+      flash = []
+      errors.each do |error|
+        flash << error.first.to_s + " " + error.second.first
+      end
+      flash.join("<br />".html_safe.to_s)
     end
   end
 end

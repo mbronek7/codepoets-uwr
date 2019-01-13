@@ -22,6 +22,7 @@ gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 gem 'turbolinks', '~> 5'
 gem 'impressionist'
 gem 'dry-validation', '~> 0.12.2'
+gem 'dry-transaction', '~> 0.13.0'
 gem "rubycritic", require: false
 gem "grape"
 gem 'grape-swagger'
