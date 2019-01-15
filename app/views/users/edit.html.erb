@@ -59,11 +59,15 @@
         </form>
       </div>
       <div class="col-lg-4 pull-lg-8 text-xs-center">
-        <img src="//placehold.it/150" class="m-x-auto img-fluid img-circle" alt="avatar" />
+        <% if @user.avatar.present? %>
+          <%= image_tag @user.avatar.variant(resize_to_fit: [250, 250]) %>
+        <% else %>
+          <img src="//placehold.it/150" class="m-x-auto img-fluid img-circle" alt="avatar" />
+        <% end %>
         <h6 class="m-t-2">Upload a different photo</h6>
         <label class="custom-file">
           <input type="file" id="file" class="custom-file-input">
-          <span class="custom-file-control">Choose file</span>
+          <%= f.file_field :avatar, class:"form-control-file", direct_upload: true %>
         </label>
       </div>
     </div>
