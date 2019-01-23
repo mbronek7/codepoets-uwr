@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  namespace :author do
+  mount API::Base => '/'
+
+  namespace :authors do
     resources :posts
   end
 

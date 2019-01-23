@@ -44,47 +44,14 @@
                   <div><%= hidden_field_tag :followed_id, @user.id %></div>
                   <%= f.submit "Follow", class: "btn btn-primary" %>
                 <% end %>
-              <% elsifcurrent_user.present? && current_user.following?(@user) %>
+              <% elsif current_user.present? && current_user.following?(@user) %>
                 <%= form_for(current_user.active_relationships.find_by(followed_id: @user.id),
                                html: { method: :delete }) do |f| %>
                   <%= f.submit "Unfollow", class: "btn btn-danger" %>
                 <% end %>
               <% end %>
             </div>
-            <div class="col-md-12">
-              <h4 class="m-t-2"><span class="fa fa-clock-o ion-clock pull-xs-right"></span> Recent Activity</h4>
-              <table class="table table-hover table-striped">
-                <tbody>
-                  <tr>
-                    <td>
-                      <strong>Abby</strong> joined ACME Project Team in <strong>`Collaboration`</strong>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <strong>Gary</strong> deleted My Board1 in <strong>`Discussions`</strong>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <strong>Kensington</strong> deleted MyBoard3 in <strong>`Discussions`</strong>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <strong>John</strong> deleted My Board1 in <strong>`Discussions`</strong>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <strong>Skell</strong> deleted his post Look at Why this is.. in <strong>`Discussions`</strong>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
           </div>
-          <!--/row-->
         </div>
         <div class="tab-pane" id="messages">
           <h4 class="m-y-2">Recent Posts </h4>
