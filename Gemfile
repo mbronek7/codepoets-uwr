@@ -35,6 +35,8 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'rspec', '~> 3.8'
+  gem 'factory_bot_rails', '~> 4.11', '>= 4.11.1'
+  gem 'pry-byebug'
 end
 
 group :development do
