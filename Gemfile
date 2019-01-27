@@ -35,11 +35,14 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'rspec', '~> 3.8'
+  gem 'factory_bot_rails', '~> 4.11', '>= 4.11.1'
+  gem 'pry-byebug'
 end
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'web-console', github: 'rails/web-console'
+  gem 'rails-erd'
 end
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

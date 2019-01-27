@@ -18,4 +18,3 @@ ActiveStorage.start()
 import "channels"
 import "actiontext"
 import "bootstrap/dist/js/bootstrap";
-

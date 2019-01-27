@@ -1,5 +1,3 @@
 en:
   errors:
-    correct_date?:
-      arg:
-        default: "birthdate must be in Y-m-d format"
+    same_password?: "passwords not equal"

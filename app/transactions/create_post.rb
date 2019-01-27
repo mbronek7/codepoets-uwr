@@ -25,8 +25,7 @@ class CreatePost
 
   def create_post(input)
     post = Post.new
-    post.attributes = input
-    post.save!
+    post.update_attributes!(input)
     post
   end
 end

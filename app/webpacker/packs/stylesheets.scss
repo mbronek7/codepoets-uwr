@@ -59,3 +59,8 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 input[type=file][data-direct-upload-url][disabled] {
   display: none;
 }
+#disqus_thread, #posts {
+  margin-left: 5em;
+  margin-right: 5em;
+
+}
