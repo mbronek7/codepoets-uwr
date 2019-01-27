@@ -50,7 +50,11 @@
       </div>
     </div>
     <div class="col-lg-4 pull-lg-8 text-xs-center">
-      <img src="//placehold.it/240" class="m-x-auto img-fluid img-circle" alt="avatar">
+      <% if @user.avatar.present? %>
+        <%= image_tag @user.avatar.variant(resize_to_fit: [350, 350]) %>
+      <% else %>
+        <img src="//placehold.it/240" class="m-x-auto img-fluid img-circle" alt="avatar">
+      <% end %>
     </div>
   </div>
 </div>

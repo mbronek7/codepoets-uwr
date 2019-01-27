@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -21,14 +22,15 @@ class User < ApplicationRecord
   extend FriendlyId
 
   has_secure_password
+  has_one_attached :avatar
   friendly_id :slug_candidates, use: %i(finders slugged)
   has_many :posts, foreign_key: :author_id, class_name: "Post", dependent: :destroy
-  has_many :active_relationships, class_name:  "Relationship",
-                              foreign_key: "follower_id",
-                              dependent:   :destroy
-  has_many :passive_following, class_name:  "Relationship",
+  has_many :active_relationships, class_name: "Relationship",
+                                  foreign_key: "follower_id",
+                                  dependent: :destroy
+  has_many :passive_following, class_name: "Relationship",
                                foreign_key: "followed_id",
-                               dependent:   :destroy
+                               dependent: :destroy
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_following, source: :follower
 
@@ -38,5 +40,4 @@ class User < ApplicationRecord
       %i(name id)
     ]
   end
-
 end
