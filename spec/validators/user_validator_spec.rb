@@ -17,7 +17,7 @@ describe UserValidator::NewUserSchema do
   let(:invalid_user_data) do
     {
       name: "",
-      email: "userexample.org",
+      email: "fdsa.pl.dot.upper.org",
       password: "pas",
       password_confirmation: "passwords"
     }

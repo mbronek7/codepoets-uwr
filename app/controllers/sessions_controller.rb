@@ -9,10 +9,10 @@ class SessionsController < ApplicationController
     p params[:email]
     if user&.authenticate(params[:password])
       session[:user_id] = user.id
-      flash[:success] = 'Succesfully authenticated'
+      flash[:success] = "Succesfully authenticated"
       redirect_to root_path
     else
-      flash[:error] = 'Could not authenticate, please try again'
+      flash[:error] = "Could not authenticate, please try again"
       redirect_to login_path
     end
   end
