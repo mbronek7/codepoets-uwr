@@ -5,6 +5,7 @@
 
 import '../javascript/sweet-alert'
 import '../javascript/dynamic-title'
+import '../javascript/direct-uploads'
 import Rails from "rails-ujs"
 Rails.start()
 
@@ -17,4 +18,3 @@ ActiveStorage.start()
 import "channels"
 import "actiontext"
 import "bootstrap/dist/js/bootstrap";
-

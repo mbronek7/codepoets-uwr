@@ -34,13 +34,15 @@ class UsersController < ApplicationController
 
   def show
     @user = User.includes(:posts, :following, :followers).friendly.find(params[:id])
+    @user_presenter = UserPresenter.new(@user)
     fresh_when etag: @user
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :biography, :proffesion, :website_url)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation,
+                                 :biography, :proffesion, :website_url, :avatar)
   end
 
   def correct_user
@@ -53,6 +55,6 @@ class UsersController < ApplicationController
     errors[:user].each do |error|
       flash << error[1].first
     end
-    flash.join("#{'<br />'.html_safe}")
+    flash.join("<br />".html_safe.to_s)
   end
 end

@@ -10,6 +10,8 @@
       <%= f.password_field :password,class:"form-control", placeholder: "Password must be at least 6 characters long" %>
       <%= f.label :password_confirmation, "Confirmation" %>
       <%= f.password_field :password_confirmation,class:"form-control",placeholder: "Confirm your password" %>
+      <%= f.label :avatar %>
+      <%= f.file_field :avatar, class:"form-control-file", direct_upload: true %>
       <%= f.submit "Create my account", class: "btn btn-primary" %>
     <% end %>
   </div>

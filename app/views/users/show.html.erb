@@ -11,45 +11,31 @@
       </ul>
       <div class="tab-content p-b-3">
         <div class="tab-pane active" id="profile">
-          <h4 class="m-y-2"><%= @user.name %></h4>
+          <h4 class="m-y-2"><%= @user_presenter.name %></h4>
           <div class="row">
             <div class="col-md-6">
               <h6>Proffesion</h6>
               <p>
-                <%= @user.proffesion.blank? ? "Not Given" :  @user.proffesion %>
+                <%= @user_presenter.proffesion_name %>
               </p>
               <h6>Biography</h6>
               <p>
-                <%= @user.biography.blank? ? "Not Given" :  @user.biography %>
+                <%= @user_presenter.biography_name %>
               </p>
               <h6>Website</h6>
               <p>
-                <% if @user.website_url.blank? %>
-                  "Not Given"
-                <% else %>
-                  <%= link_to "#{@user.website_url}", "http://#{@user.website_url}" %>
-                <% end %>
+                <%= @user_presenter.website_link %>
               </p>
             </div>
             <div class="col-md-6">
               <h6>Recent Tags</h6>
-              <% @user.posts.order(updated_at: :desc).take(3).map(&:tags).flatten.each do | tag |%>
+              <% @user_presenter.recent_tags.each do | tag |%>
                 <%= link_to tag.name, tag_path(tag.name), class: "badge badge-info"%>
               <% end %>
               <hr>
               <span class="badge badge-primary"><i class="fa fa-user"></i> <%= @user.followers.count %> Followers</span>
               <span class="badge badge-danger"><i class="fa fa-eye"></i> <%= @user.posts.sum(:impressions_count) %> Post Views</span>
-              <% if current_user.present? && !current_user.following?(@user) %>
-                <%= form_for(current_user.passive_following.build, remote: true) do |f| %>
-                  <div><%= hidden_field_tag :followed_id, @user.id %></div>
-                  <%= f.submit "Follow", class: "btn btn-primary" %>
-                <% end %>
-              <% elsif current_user.present? && current_user.following?(@user) %>
-                <%= form_for(current_user.active_relationships.find_by(followed_id: @user.id),
-                               html: { method: :delete }) do |f| %>
-                  <%= f.submit "Unfollow", class: "btn btn-danger" %>
-                <% end %>
-              <% end %>
+               <%= render partial: "users/relationship_forms", locals: { user: @user }%>
             </div>
           </div>
         </div>
@@ -57,20 +43,18 @@
           <h4 class="m-y-2">Recent Posts </h4>
           <table class="table table-hover table-striped">
             <tbody>
-              <% @user.posts.order(updated_at: :desc).take(3).each do | post |%>
-                <tr>
-                  <td>
-                    <span class="pull-xs-right font-weight-bold"><%= time_ago_in_words(post.updated_at) %> ago</span> <%= link_to post.title, post %>
-                  </td>
-                </tr>
-              <% end %>
+              <%= render partial: "users/recent_posts", locals: { posts: @user_presenter.recent_posts }%>
             </tbody>
           </table>
         </div>
       </div>
     </div>
     <div class="col-lg-4 pull-lg-8 text-xs-center">
-      <img src="//placehold.it/240" class="m-x-auto img-fluid img-circle" alt="avatar">
+      <% if @user.avatar.present? %>
+        <%= image_tag @user.avatar.variant(resize_to_fit: [350, 350]) %>
+      <% else %>
+        <img src="//placehold.it/240" class="m-x-auto img-fluid img-circle" alt="avatar">
+      <% end %>
     </div>
   </div>
 </div>
